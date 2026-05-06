@@ -2,8 +2,6 @@
 
 Admin dashboard application built for a frontend internship assessment.
 
-## Live Demo
-- Vercel URL: pending deployment update
 
 ## Features
 - Login with DummyJSON credentials and token persistence

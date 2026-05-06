@@ -18,17 +18,14 @@ import { useProductStore } from '../../store/productStore';
 const formatCategory = (slug) => slug.replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase());
 
 export default function ProductsPage() {
-  const { products, total, categories, loading, fetchProducts, searchProducts, fetchCategories, fetchByCategory } =
-    useProductStore((state) => ({
-      products: state.products,
-      total: state.total,
-      categories: state.categories,
-      loading: state.loading,
-      fetchProducts: state.fetchProducts,
-      searchProducts: state.searchProducts,
-      fetchCategories: state.fetchCategories,
-      fetchByCategory: state.fetchByCategory
-    }));
+  const products = useProductStore((state) => state.products);
+  const total = useProductStore((state) => state.total);
+  const categories = useProductStore((state) => state.categories);
+  const loading = useProductStore((state) => state.loading);
+  const fetchProducts = useProductStore((state) => state.fetchProducts);
+  const searchProducts = useProductStore((state) => state.searchProducts);
+  const fetchCategories = useProductStore((state) => state.fetchCategories);
+  const fetchByCategory = useProductStore((state) => state.fetchByCategory);
 
   const [page, setPage] = useState(1);
   const [limit] = useState(12);

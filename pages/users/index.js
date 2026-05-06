@@ -10,13 +10,11 @@ import { useUserStore } from '../../store/userStore';
 
 export default function UsersPage() {
   const router = useRouter();
-  const { users, total, loading, fetchUsers, searchUsers } = useUserStore((state) => ({
-    users: state.users,
-    total: state.total,
-    loading: state.loading,
-    fetchUsers: state.fetchUsers,
-    searchUsers: state.searchUsers
-  }));
+  const users = useUserStore((state) => state.users);
+  const total = useUserStore((state) => state.total);
+  const loading = useUserStore((state) => state.loading);
+  const fetchUsers = useUserStore((state) => state.fetchUsers);
+  const searchUsers = useUserStore((state) => state.searchUsers);
 
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);

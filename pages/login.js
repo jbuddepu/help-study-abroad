@@ -18,11 +18,9 @@ import { useAuthStore } from '../store/authStore';
 export default function LoginPage() {
   const router = useRouter();
   const login = useAuthStore((state) => state.login);
-  const { token, loading, error } = useAuthStore((state) => ({
-    token: state.token,
-    loading: state.loading,
-    error: state.error
-  }));
+  const token = useAuthStore((state) => state.token);
+  const loading = useAuthStore((state) => state.loading);
+  const error = useAuthStore((state) => state.error);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 

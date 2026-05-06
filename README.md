@@ -1,86 +1,105 @@
-# Help Study Abroad — Frontend Assessment
+# Help Study Abroad - Frontend Assessment
 
-## Overview
-Admin dashboard built with Next.js, MUI, and Zustand. 
-Connects to DummyJSON REST API for users and products data.
+Admin dashboard application built for a frontend internship assessment.
 
-## Tech Stack
-| Tech | Version | Reason |
-|------|---------|--------|
-| Next.js | 14 | Pages Router for simplicity |
-| MUI | v5 | Required by assessment |
-| Zustand | latest | Lightweight state, no boilerplate |
-| Axios | latest | Clean HTTP client with interceptors |
-
-## Why Zustand over Redux?
-Zustand provides global state with minimal setup — no Provider,
-no reducers, no action creators. Async actions work directly
-inside store functions. Ideal for small-to-medium apps.
-
-## Setup & Run
-git clone <your-repo>
-cd help-study-abroad
-npm install
-cp .env.local.example .env.local   # see below
-npm run dev
-
-## Environment Variables (.env.local)
-NEXT_PUBLIC_API_URL=https://dummyjson.com
-
-## Test Credentials
-Username: emilys
-Password: emilyspass
+## Live Demo
+- Vercel URL: pending deployment update
 
 ## Features
-- [x] Login with DummyJSON auth (accessToken storage)
-- [x] Protected routes (token-based guard)
-- [x] Users list: pagination + search
-- [x] User detail page: full profile
-- [x] Products list: pagination + search + category filter
-- [x] Product detail: image gallery + specs
-- [x] Zustand stores with async actions + in-memory caching
-- [x] Responsive MUI layout (mobile + desktop)
-- [x] React.memo, useCallback, useMemo optimizations
+- Login with DummyJSON credentials and token persistence
+- Protected routes with redirect to login for unauthenticated users
+- Dashboard summary cards for users, products, and categories
+- Users module with search, pagination, and profile detail pages
+- Products module with search, category filter, pagination, and detail pages
+- Zustand domain stores for auth, users, and products
+- Axios API abstraction with request interceptor support
+- Responsive Material UI layout for desktop and mobile
+
+## Tech Stack
+- Next.js 14 (Pages Router)
+- React 18
+- Material UI (MUI)
+- Zustand
+- Axios
+
+## Screenshots
+### Login
+![Login Page](public/screenshots/login-page.png)
+
+### Dashboard
+![Dashboard Page](public/screenshots/dashboard-page.png)
+
+### Users
+![Users Page](public/screenshots/users-page.png)
+
+### Products
+![Products Page](public/screenshots/products-page.png)
+
+## Test Credentials
+- Username: emilys
+- Password: emilyspass
+
+## Environment Variables
+Create a .env.local file from .env.local.example:
+
+NEXT_PUBLIC_API_URL=https://dummyjson.com
+
+## Run Locally
+Using npm:
+1. npm install
+2. npm run dev
+
+Using bun:
+1. bun install
+2. bun run dev
+
+Open http://localhost:3000 (or the next available port printed in the terminal).
+
+## Production Build
+- npm run build
+- bun run build
 
 ## Folder Structure
-```text
 help-study-abroad/
-├── components/
-│   ├── Layout.jsx
-│   ├── Loader.jsx
-│   ├── ProductCard.jsx
-│   ├── ProtectedRoute.jsx
-│   └── UserTable.jsx
-├── lib/
-│   └── api.js
-├── pages/
-│   ├── _app.js
-│   ├── index.js
-│   ├── login.js
-│   ├── dashboard/
-│   │   └── index.js
-│   ├── products/
-│   │   ├── [id].js
-│   │   └── index.js
-│   └── users/
-│       ├── [id].js
-│       └── index.js
-├── store/
-│   ├── authStore.js
-│   ├── productStore.js
-│   └── userStore.js
-├── styles/
-│   └── globals.css
-├── theme/
-│   └── index.js
-├── .env.local.example
-├── jsconfig.json
-├── next.config.js
-├── package.json
-└── README.md
-```
+- components/
+  - Layout.jsx
+  - Loader.jsx
+  - ProductCard.jsx
+  - ProtectedRoute.jsx
+  - UserTable.jsx
+- lib/
+  - api.js
+- pages/
+  - _app.js
+  - index.js
+  - login.js
+  - dashboard/index.js
+  - users/index.js
+  - users/[id].js
+  - products/index.js
+  - products/[id].js
+- store/
+  - authStore.js
+  - userStore.js
+  - productStore.js
+- styles/
+  - globals.css
+- theme/
+  - index.js
 
-## Caching Strategy
-In-memory Zustand cache keyed by "skip-limit" string.
-Avoids repeat API calls when navigating back to same page.
-Cache is session-scoped (cleared on browser refresh).
+## Architecture Notes
+- Domain-first state separation with independent stores
+- Reusable layout and UI components across pages
+- Centralized API client for consistent request behavior
+- Token stored in state and synchronized with localStorage
+
+## Trade-Offs
+- Data lists are client-rendered to keep implementation straightforward
+- In-memory caching favors speed during navigation over persistence
+- Zustand chosen over Redux to reduce boilerplate for this project size
+
+## What I Would Improve Next
+- Add unit tests for stores and key reusable components
+- Add end-to-end tests for auth and protected-route flows
+- Add richer empty and error states with skeleton loaders
+- Add table sorting controls for users and products

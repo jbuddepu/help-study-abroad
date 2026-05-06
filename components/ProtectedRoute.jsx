@@ -4,16 +4,16 @@ import { useAuthStore } from '../store/authStore';
 import Loader from './Loader';
 
 const ProtectedRoute = ({ children }) => {
-  const accessToken = useAuthStore((state) => state.accessToken);
+  const token = useAuthStore((state) => state.token);
   const router = useRouter();
 
   useEffect(() => {
-    if (!accessToken) {
+    if (!token) {
       router.replace('/login');
     }
-  }, [accessToken, router]);
+  }, [router, token]);
 
-  if (!accessToken) {
+  if (!token) {
     return <Loader />;
   }
 

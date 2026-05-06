@@ -8,7 +8,7 @@ import api from '../lib/api';
 
 export const useAuthStore = create((set) => ({
   user: null,
-  accessToken: null,
+  token: null,
   loading: false,
   error: null,
 
@@ -20,7 +20,7 @@ export const useAuthStore = create((set) => ({
         password,
         expiresInMins: 60
       });
-      set({ user: data, accessToken: data.accessToken, loading: false });
+      set({ user: data, token: data.accessToken, loading: false });
       localStorage.setItem('accessToken', data.accessToken);
       localStorage.setItem('user', JSON.stringify(data));
     } catch (error) {
@@ -31,7 +31,7 @@ export const useAuthStore = create((set) => ({
   },
 
   logout: () => {
-    set({ user: null, accessToken: null, error: null });
+    set({ user: null, token: null, error: null });
     localStorage.removeItem('accessToken');
     localStorage.removeItem('user');
   },
@@ -41,11 +41,11 @@ export const useAuthStore = create((set) => ({
       return;
     }
 
-    const accessToken = localStorage.getItem('accessToken');
+    const token = localStorage.getItem('accessToken');
     const userData = localStorage.getItem('user');
 
-    if (accessToken && userData) {
-      set({ accessToken, user: JSON.parse(userData) });
+    if (token && userData) {
+      set({ token, user: JSON.parse(userData) });
     }
   }
 }));

@@ -18,8 +18,8 @@ import { useAuthStore } from '../store/authStore';
 export default function LoginPage() {
   const router = useRouter();
   const login = useAuthStore((state) => state.login);
-  const { accessToken, loading, error } = useAuthStore((state) => ({
-    accessToken: state.accessToken,
+  const { token, loading, error } = useAuthStore((state) => ({
+    token: state.token,
     loading: state.loading,
     error: state.error
   }));
@@ -27,10 +27,10 @@ export default function LoginPage() {
   const [password, setPassword] = useState('');
 
   useEffect(() => {
-    if (accessToken) {
+    if (token) {
       router.replace('/dashboard');
     }
-  }, [accessToken, router]);
+  }, [router, token]);
 
   const handleSubmit = useCallback(
     async (event) => {
